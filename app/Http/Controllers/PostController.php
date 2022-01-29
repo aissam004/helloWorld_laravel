@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Rules\Lowercase;
 use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -24,6 +26,12 @@ class PostController extends Controller
         return view('create');
     }
     public function store(Request $request){
+
+        $validated=$request->validate([
+           'title' => ['required','min:5','max:30',new Lowercase()],
+           'content'=> 'required'
+       ]);
+
 //        $post =new Post();
 ////        $post->title=$request->title;
 ////        $post->content=$request->input("content");
@@ -31,7 +39,7 @@ class PostController extends Controller
 
         Post::create([
             'title' => $request->title,
-            'content'=>$request->content
+            'content'=>$request->input('content')
         ]);
         return view('create');
     }

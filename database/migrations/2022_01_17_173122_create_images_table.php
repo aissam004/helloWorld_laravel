@@ -17,6 +17,7 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('path')->default('default.png');
             $table->foreignId('post_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('artiste_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

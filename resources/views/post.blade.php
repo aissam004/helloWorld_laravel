@@ -4,12 +4,14 @@
 @section('content')
 
     @foreach($post->tags as $tag)
-        <a href={{route('tags.show',[$tag->id])}} class="badge bg-dark" style="cursor: default;">#{{$tag->name}}</a>
+        <a href="{{route('tags.show',[$tag->id])}}" class="badge bg-dark" style="cursor: default;">#{{$tag->name}}</a>
     @endforeach
 
     <h2>Post: {{$post->title}}</h2>
     <p>{{$post->content}}</p>
-
+    @if($post->image!=null)
+    <p>{{$post->image->path}}</p>
+    @endif
     <form action="{{route('comments.store',['id'=>$post->id])}}" method="post">
         @csrf
         <div class="form-group">
