@@ -9,8 +9,9 @@
 
     <h2>Post: {{$post->title}}</h2>
     <p>{{$post->content}}</p>
+
     @if($post->image!=null)
-    <p>{{$post->image->path}}</p>
+        <img src="{{Storage::url($post->image->path)}}" alt="">
     @endif
     <form action="{{route('comments.store',['id'=>$post->id])}}" method="post">
         @csrf
